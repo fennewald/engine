@@ -1,4 +1,5 @@
-#include <iostream>
+#include "server.hh"
+
 #include <cstddef>
 
 #define likely(x)   __builtin_expect(!!(x), 1)
@@ -6,9 +7,8 @@
 
 bool starts_with(const char * path, const char * tgt) {
 	// TODO: Make simd
-	for (std::size_t idx=0; tgt[idx] != '\0'; ++idx)
-		if (path[idx] != tgt[idx])
-			return false;
+	for (std::size_t idx = 0; tgt[idx] != '\0'; ++idx)
+		if (path[idx] != tgt[idx]) return false;
 	return true;
 }
 
@@ -20,6 +20,7 @@ void handle(const char * path) {
 }
 
 int main(void) {
-	int main = 23;
-	std::cout << "test\n";
+	Server server = Server::load_dir("./srv");
+
+	server.serve(2000);
 }
